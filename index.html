@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#faf9f3">
+<title>AR QUEST | 先生たちのひみつを探れ！</title>
+<link rel="icon" href="assets/compass.svg"><link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<symbol id="compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="m16.8 7.2-3.1 6.5-6.5 3.1 3.1-6.5Z"/><path d="m10.5 10.5 3 3"/></symbol>
+<symbol id="book" viewBox="0 0 24 24"><path d="M3 4.5q4.8-1.4 9 1 4.2-2.4 9-1V19q-4.5-1.4-9 1-4.5-2.4-9-1Z M12 5.5V20"/></symbol>
+<symbol id="camera" viewBox="0 0 24 24"><path d="M3 7.5h4.4l1.5-2.7h6.2l1.5 2.7H21v12H3Z"/><circle cx="12" cy="13" r="3.4"/></symbol>
+<symbol id="arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+<symbol id="clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.5V12l3.5 2"/></symbol>
+<symbol id="flag" viewBox="0 0 24 24"><path d="M5 21V4q4-2 7 0t7 0v10q-4 2-7 0t-7 0"/></symbol>
+<symbol id="users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2m0-15a3 3 0 0 1 0 6m3 2a5 5 0 0 1 3 5v2"/></symbol>
+<symbol id="bulb" viewBox="0 0 24 24"><path d="M8 15a7 7 0 1 1 8 0c-1.4 1-1.4 2-1.4 3H9.4c0-1 0-2-1.4-3ZM10 21h4"/></symbol>
+<symbol id="gear" viewBox="0 0 24 24"><path d="m9 3-.6 2.4L6.2 6.7 4 6l-2 3.5 1.8 1.6v2L2 14.6 4 18l2.2-.6 2.2 1.2L9 21h4.5l.8-2.4 2.1-1.2 2.3.6 2-3.4-1.8-1.6v-2l1.8-1.5-2-3.5-2.3.7-2.1-1.3-.8-2.4Z"/><circle cx="11.5" cy="12" r="3"/></symbol>
+<symbol id="check" viewBox="0 0 24 24"><path d="m5 12 4.5 5L19 7"/></symbol>
+</defs></svg>
+<header class="topbar"><div class="barinner"><div class="brand"><span class="brand-icon"><svg><use href="#compass"/></svg></span><b>AR QUEST</b></div><span class="school">青翔開智 オープンスクール</span><button id="help" class="smallbtn"><svg><use href="#book"/></svg>遊び方</button></div></header>
+<main>
+<div id="modeLabel" hidden>開発用デモ · カメラを使わない動作確認</div>
+<section id="home">
+<div class="hero"><div class="hero-art"></div><div class="hero-copy">
+<div class="mission"><svg><use href="#flag"/></svg>今回のミッション</div>
+<h1>先生たちの<br><span>ひみつ</span>を探れ！</h1>
+<p>先生の写真にカメラをかざそう。<br>動画にかくれたヒントを集めて、プリントの謎を解こう！</p>
+<button class="primary" id="start" disabled><svg><use href="#camera"/></svg><span>カメラで探索をはじめる</span><svg><use href="#arrow"/></svg></button>
+<div class="startnote"><svg><use href="#clock"/></svg> 約10分 <i></i> カメラの使用を許可してね</div>
+</div></div></section>
+<section id="explore" hidden><div class="scanhead"><h1>先生を探そう</h1><button id="back" class="smallbtn">手帳にもどる</button></div>
+<div class="viewer"><div id="surface"></div><div class="reticle" aria-hidden="true"></div><div class="scan-count"></div><div id="cameraNotice" hidden></div></div>
+<div class="scan-actions"><div><strong id="scanStatus" role="status"></strong><p id="scanTip">写真から30〜60cmはなれ、上に少し余白をあけよう。</p></div><button id="retry" class="smallbtn" hidden>もう一度ためす</button><button id="play" class="smallbtn" hidden>動画を再生</button></div><div id="demoControls" hidden></div></section>
+<section class="notebook" aria-labelledby="booktitle"><div class="notebook-head"><h2 id="booktitle"><span class="section-icon"><svg><use href="#book"/></svg></span>先生の発見手帳</h2><div class="countbox"><svg><use href="#users"/></svg><span>発見した先生</span><strong id="count">0 <small>/ 5</small></strong></div></div>
+<p id="complete" role="status" hidden>5人全員発見！ プリントの謎を解こう！</p>
+<div id="roster" class="roster"></div></section>
+<aside class="hint"><span class="hinticon"><svg><use href="#bulb"/></svg></span><div><strong>探索のヒント</strong><p>写真はどの順番で探してもOK！ 見つけた先生の動画は、何度でも見られるよ。</p></div></aside>
+<p id="notice" role="status" hidden></p>
+</main>
+<footer><span><svg><use href="#compass"/></svg> AR QUEST</span><button id="staff"><svg><use href="#gear"/></svg>スタッフ用</button></footer>
+<dialog id="dialog" aria-labelledby="dlgTitle"><div class="dialog-head"><h2 id="dlgTitle"></h2><button id="closeModal" aria-label="閉じる">×</button></div><div id="dlgBody"></div></dialog>
+<script type="module" src="js/app.js"></script>
+</body></html>

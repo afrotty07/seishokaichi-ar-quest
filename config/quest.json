@@ -1,0 +1,58 @@
+{
+  "questId": "teacher-secrets",
+  "configVersion": 2,
+  "title": "先生たちのひみつを探れ！",
+  "targetFile": "assets/targets/targets.mind",
+  "teachers": [
+    {
+      "id": "T01",
+      "targetIndex": 0,
+      "name": "田村 幹樹",
+      "role": "探究",
+      "image": "assets/markers/T01.jpg",
+      "video": "assets/videos/T01.mp4",
+      "profile": "https://seishokaichi.jp/teachers/1915/",
+      "source": "https://i0.wp.com/seishokaichi.jp/wp-content/uploads/2020/07/2O3A0637-1.jpg?fit=768%2C512&ssl=1"
+    },
+    {
+      "id": "T02",
+      "targetIndex": 1,
+      "name": "織田澤 博樹",
+      "role": "校長",
+      "image": "assets/markers/T02.jpg",
+      "video": "assets/videos/T02.mp4",
+      "profile": "https://seishokaichi.jp/teachers/2063/",
+      "source": "https://i0.wp.com/seishokaichi.jp/wp-content/uploads/2020/08/2O3A0383-1.jpg?fit=768%2C512&ssl=1"
+    },
+    {
+      "id": "T03",
+      "targetIndex": 2,
+      "name": "横井 麻衣子",
+      "role": "司書・広報",
+      "image": "assets/markers/T03.jpg",
+      "video": "assets/videos/T03.mp4",
+      "profile": "https://seishokaichi.jp/teachers/1918/",
+      "source": "https://i0.wp.com/seishokaichi.jp/wp-content/uploads/2020/07/2O3A0924-1.jpg?fit=768%2C512&ssl=1"
+    },
+    {
+      "id": "T04",
+      "targetIndex": 3,
+      "name": "森川 真吾",
+      "role": "英語",
+      "image": "assets/markers/T04.jpg",
+      "video": "assets/videos/T04.mp4",
+      "profile": "https://seishokaichi.jp/teachers/1924/",
+      "source": "https://i0.wp.com/seishokaichi.jp/wp-content/uploads/2020/07/2O3A0976-1.jpg?fit=768%2C512&ssl=1"
+    },
+    {
+      "id": "T05",
+      "targetIndex": 4,
+      "name": "森本 浩子",
+      "role": "国語・教頭",
+      "image": "assets/markers/T05.jpg",
+      "video": "assets/videos/T05.mp4",
+      "profile": "https://seishokaichi.jp/teachers/2024/",
+      "source": "https://i0.wp.com/seishokaichi.jp/wp-content/uploads/2020/08/2O3A0969-1.jpg?fit=768%2C512&ssl=1"
+    }
+  ]
+}
