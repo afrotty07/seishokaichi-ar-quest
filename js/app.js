@@ -28,7 +28,7 @@ dialog.addEventListener('close',()=>{if (active && ready && !document.hidden) pl
 dialog.addEventListener('click',e=>{if (e.target === dialog && (e.clientX<dialog.getBoundingClientRect().left || e.clientX>dialog.getBoundingClientRect().right)) close();});
 $('help').onclick = () => {
   const list = document.createElement('ol');
-  for (const text of ['プリントとえんぴつを用意しよう。探索をはじめたら、カメラの使用を許可してね。','立ち止まって先生の写真にカメラをかざそう。動画が見切れたら、少しうしろに下がろう。','先生の好きなものを聞いてプリントに書こう。5人分そろったら、番号順に文字を読んでスタッフに見せよう。']) {
+  for (const text of ['プリントとえんぴつを用意しよう。探索をはじめたら、カメラの使用を許可してね。','立ち止まって先生の写真にカメラをかざそう。写真に動画が重なるよ。四つの角が画面からはみ出したら、少しうしろに下がろう。','先生の好きなものを聞いてプリントに書こう。5人分そろったら、番号順に文字を読んでスタッフに見せよう。']) {
     const li = document.createElement('li'); li.textContent = text; list.append(li);
   }
   modal('遊び方',list,button('わかった',close,true));
@@ -145,7 +145,7 @@ async function start() {
   tracking = frame;
   frame.title = 'AR探索カメラ';
   frame.allow = 'camera; autoplay';
-  frame.src = 'js/camera.html';
+  frame.src = 'js/camera.html?v=photo-overlay';
   cameraTimer = setTimeout(()=>{if(!signal.aborted) cameraError(Error('timeout'));},60000);
   frame.onload = async () => {
     if (signal.aborted) return;

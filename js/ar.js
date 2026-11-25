@@ -48,6 +48,8 @@ window.startTracking = async ({config, player, found, lost, signal}) => {
   if (disposed) return;
   controller = new MINDAR.IMAGE.Controller({
     inputWidth:camera.videoWidth,inputHeight:camera.videoHeight,maxTrack:1,missTolerance:2,warmupTolerance:2,
+    // MindAR's adaptive filter damps small pose changes while responding to larger motion.
+    filterMinCF:0.0018,filterBeta:0.12,
     onUpdate(data) {
       if (!disposed && data.type === 'updateMatrix') {
         anchors.get(data.targetIndex)?.components['mindar-image-target'].updateWorldMatrix(data.worldMatrix);
@@ -64,16 +66,24 @@ window.startTracking = async ({config, player, found, lost, signal}) => {
     const anchor = anchors.get(t.targetIndex);
     const [w,h] = dimensions[t.targetIndex];
     anchor.components['mindar-image-target'].setupMarker([w,h]);
-    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(1,1),material);
+    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(1,h/w),material);
     anchor.setObject3D('clip',mesh);
-    const size = () => {
-      const height = player.video.videoWidth ? player.video.videoHeight/player.video.videoWidth : 9/16;
-      mesh.scale.set(1,height,1);
-      mesh.position.y = h/w/2 + height/2 + .025;
-      mesh.visible = player.selected === t.id && player.video.readyState >= 2;
+    const updateClip = () => {
+      const {videoWidth,videoHeight,readyState,error} = player.video;
+      mesh.visible = player.selected === t.id && readyState >= 2 && videoWidth > 0 && videoHeight > 0 && !error;
+      if (!mesh.visible) return;
+
+      // Fill the photograph's rectangle, preserving the proportions of the video.
+      const ratio = (w/h)/(videoWidth/videoHeight);
+      const cropX = Math.min(1,ratio);
+      const cropY = Math.min(1,1/ratio);
+      texture.repeat.set(cropX,cropY);
+      texture.offset.set((1-cropX)/2,(1-cropY)/2);
     };
-    for (const event of ['loadeddata','playing','emptied','error']) player.video.addEventListener(event,size,{signal});
-    size();
+    for (const event of ['loadeddata','playing','emptied','error','resize']) {
+      player.video.addEventListener(event,updateClip,{signal});
+    }
+    updateClip();
   }
   const system = scene.systems['mindar-image-system'];
   Object.assign(system,{video:camera,controller,container:document.body});
